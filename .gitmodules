@@ -1,0 +1,30 @@
+[submodule "Formats"]
+	path = Formats
+	url = https://github.com/horsicq/Formats.git
+[submodule "FormatDialogs"]
+	path = FormatDialogs
+	url = https://github.com/horsicq/FormatDialogs.git
+[submodule "FormatWidgets"]
+	path = FormatWidgets
+	url = https://github.com/horsicq/FormatWidgets.git
+[submodule "Controls"]
+	path = Controls
+	url = https://github.com/horsicq/Controls.git
+[submodule "QHexView"]
+	path = QHexView
+	url = https://github.com/horsicq/QHexView.git
+[submodule "XOptions"]
+	path = XOptions
+	url = https://github.com/horsicq/XOptions.git
+[submodule "XStyles"]
+	path = XStyles
+	url = https://github.com/horsicq/XStyles.git
+[submodule "XTranslation"]
+	path = XTranslation
+	url = https://github.com/horsicq/XTranslation.git
+[submodule "XDisasm"]
+	path = XDisasm
+	url = https://github.com/horsicq/XDisasm.git
+[submodule "XCapstone"]
+	path = XCapstone
+	url = https://github.com/horsicq/XCapstone.git
