@@ -27,7 +27,7 @@ XCONFIG += use_disasm
 
 !contains(XCONFIG, pewidget) {
     XCONFIG += pewidget
-    include(../../_mylibs/FormatWidgets/PE/pewidget.pri)
+    include(../XDisasm/xdisasm.pri)
 }
 
 !contains(XCONFIG, xoptions) {

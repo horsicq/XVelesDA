@@ -30,7 +30,7 @@
 #include <QMimeData>
 #include "dialogoptions.h"
 #include "dialogabout.h"
-#include "pewidget.h"
+#include "xdisasmwidget.h"
 
 namespace Ui {
 class GuiMainWindow;
@@ -62,7 +62,6 @@ protected:
 private:
     Ui::GuiMainWindow *ui;
     XOptions xOptions;
-    FW_DEF::OPTIONS formatOptions;
 
     QFile *pFile;
 };

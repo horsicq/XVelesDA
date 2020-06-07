@@ -48,7 +48,7 @@
          <number>0</number>
         </property>
         <item>
-         <widget class="PEWidget" name="widgetViewer" native="true"/>
+         <widget class="XDisasmWidget" name="widgetViewer" native="true"/>
         </item>
        </layout>
       </widget>
@@ -126,9 +126,9 @@
  </widget>
  <customwidgets>
   <customwidget>
-   <class>PEWidget</class>
+   <class>XDisasmWidget</class>
    <extends>QWidget</extends>
-   <header>pewidget.h</header>
+   <header>xdisasmwidget.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

@@ -133,14 +133,13 @@ void GuiMainWindow::processFile(QString sFileName, bool bReload)
             if(pe.isValid())
             {
                 ui->stackedWidgetMain->setCurrentIndex(1);
-                formatOptions.bIsImage=false;
-                formatOptions.nImageBase=-1;
-                formatOptions.sBackupFileName=XBinary::getBackupName(pFile);
-                ui->widgetViewer->setData(pFile,&formatOptions,0,0,0);
+
+                ui->widgetViewer->setData(pFile);
 
                 if(bReload)
                 {
-                    ui->widgetViewer->reload();
+                    ui->widgetViewer->analyze();
+                    ui->widgetViewer->goToEntryPoint();
                 }
 
                 setWindowTitle(sFileName);
