@@ -1,6 +1,6 @@
 QT       += core gui widgets
 
-TARGET = xpeviewer
+TARGET = xvelesda
 TEMPLATE = app
 
 CONFIG += c++11
