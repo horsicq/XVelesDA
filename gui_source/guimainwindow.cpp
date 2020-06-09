@@ -141,27 +141,19 @@ void GuiMainWindow::processFile(QString sFileName, bool bReload)
 
         if(pFile)
         {
-            XPE pe(pFile);
-            if(pe.isValid())
+            ui->stackedWidgetMain->setCurrentIndex(1);
+
+            ui->widgetViewer->setData(pFile);
+
+            adjust();
+
+            if(bReload)
             {
-                ui->stackedWidgetMain->setCurrentIndex(1);
-
-                ui->widgetViewer->setData(pFile);
-
-                adjust();
-
-                if(bReload)
-                {
-                    ui->widgetViewer->analyze();
-                    ui->widgetViewer->goToEntryPoint();
-                }
-
-                setWindowTitle(sFileName);
+                ui->widgetViewer->analyze();
+                ui->widgetViewer->goToEntryPoint();
             }
-            else
-            {
-                QMessageBox::critical(this,tr("Error"),tr("It is not a valid file"));
-            }
+
+            setWindowTitle(sFileName);
         }
         else
         {
