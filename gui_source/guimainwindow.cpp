@@ -105,6 +105,18 @@ void GuiMainWindow::on_actionAbout_triggered()
 void GuiMainWindow::adjust()
 {
     xOptions.adjustStayOnTop(this);
+
+    if(pFile)
+    {
+        if(xOptions.isSaveBackup())
+        {
+            ui->widgetViewer->setBackupFileName(XBinary::getBackupName(pFile));
+        }
+        else
+        {
+            ui->widgetViewer->setBackupFileName("");
+        }
+    }
 }
 
 void GuiMainWindow::processFile(QString sFileName, bool bReload)
@@ -135,6 +147,8 @@ void GuiMainWindow::processFile(QString sFileName, bool bReload)
                 ui->stackedWidgetMain->setCurrentIndex(1);
 
                 ui->widgetViewer->setData(pFile);
+
+                adjust();
 
                 if(bReload)
                 {
