@@ -150,7 +150,6 @@ void GuiMainWindow::processFile(QString sFileName, bool bReload)
             if(bReload)
             {
                 ui->widgetViewer->analyze();
-                ui->widgetViewer->goToEntryPoint();
             }
 
             setWindowTitle(sFileName);
