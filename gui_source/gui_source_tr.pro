@@ -1,12 +1,13 @@
 TRANSLATIONS = \
-        translation/xpeviewer_vi.ts \
-        translation/xpeviewer_zh.ts \
-        translation/xpeviewer_zh_TW.ts
+        translation/xvelesda_vi.ts \
+        translation/xvelesda_zh.ts \
+        translation/xvelesda_zh_TW.ts
 
 FORMS += \
     ../FormatDialogs/dialogdump.ui \
     ../FormatDialogs/dialogdumpprocess.ui \
     ../FormatDialogs/dialoggotoaddress.ui \
+    ../FormatDialogs/dialoghexsignature.ui \
     ../FormatDialogs/dialogsearch.ui \
     ../FormatDialogs/dialogsearchprocess.ui \
     ../FormatDialogs/dialogsearchstrings.ui \
@@ -31,20 +32,15 @@ FORMS += \
     ../FormatWidgets/PE/sectionheaderwidget.ui \
     ../FormatWidgets/SearchStrings/searchstringswidget.ui \
     ../FormatWidgets/dialogentropy.ui \
-    ../FormatWidgets/dialoghex.ui \
     ../FormatWidgets/dialogprocessdata.ui \
     ../FormatWidgets/dialogsectionheader.ui \
     ../FormatWidgets/toolswidget.ui \
+    ../QHexView/dialoghex.ui \
     ../QHexView/qhexviewwidget.ui \
-    ../StaticScan/dialogstaticscan.ui \
-    ../StaticScan/formresult.ui \
-    ../StaticScan/formstaticscan.ui \
-    ../StaticScan/heurwidget.ui \
     ../XDisasm/dialogdisasmlabels.ui \
+    ../XDisasm/dialogdisasmprocess.ui \
+    ../XDisasm/dialogsignature.ui \
     ../XDisasm/xdisasmwidget.ui \
-    ../XEntropyWidget/dialogentropyprocess.ui \
-    ../XEntropyWidget/xentropywidget.ui \
-    ../XMemoryMapWidget/xmemorymapwidget.ui \
     dialogabout.ui \
     dialogoptions.ui \
     guimainwindow.ui
@@ -57,6 +53,7 @@ HEADERS += \
     ../Controls/xlineedithex.h \
     ../FormatDialogs/dialogdumpprocess.h \
     ../FormatDialogs/dialoggotoaddress.h \
+    ../FormatDialogs/dialoghexsignature.h \
     ../FormatDialogs/dialogsearch.h \
     ../FormatDialogs/dialogsearchprocess.h \
     ../FormatDialogs/dialogsearchstrings.h \
@@ -97,7 +94,6 @@ HEADERS += \
     ../FormatWidgets/PE/sectionheaderwidget.h \
     ../FormatWidgets/SearchStrings/searchstringswidget.h \
     ../FormatWidgets/dialogentropy.h \
-    ../FormatWidgets/dialoghex.h \
     ../FormatWidgets/dialogprocessdata.h \
     ../FormatWidgets/dialogsectionheader.h \
     ../FormatWidgets/formatwidget.h \
@@ -107,6 +103,8 @@ HEADERS += \
     ../FormatWidgets/toolswidget.h \
     ../Formats/subdevice.h \
     ../Formats/xbinary.h \
+    ../Formats/xcom.h \
+    ../Formats/xcom_def.h \
     ../Formats/xelf.h \
     ../Formats/xelf_def.h \
     ../Formats/xformats.h \
@@ -120,140 +118,131 @@ HEADERS += \
     ../Formats/xne_def.h \
     ../Formats/xpe.h \
     ../Formats/xpe_def.h \
+    ../QHexView/dialoghex.h \
     ../QHexView/qhexview.h \
     ../QHexView/qhexviewwidget.h \
-    ../SpecAbstract/specabstract.h \
-    ../StaticScan/dialogstaticscan.h \
-    ../StaticScan/formresult.h \
-    ../StaticScan/formstaticscan.h \
-    ../StaticScan/heurwidget.h \
-    ../StaticScan/staticscan.h \
-    ../StaticScan/staticscanitem.h \
-    ../StaticScan/staticscanitemmodel.h \
-    ../XCapstone/3rdparty/Capstone/include/capstone/arm.h \
-    ../XCapstone/3rdparty/Capstone/include/capstone/arm64.h \
-    ../XCapstone/3rdparty/Capstone/include/capstone/capstone.h \
-    ../XCapstone/3rdparty/Capstone/include/capstone/evm.h \
-    ../XCapstone/3rdparty/Capstone/include/capstone/m680x.h \
-    ../XCapstone/3rdparty/Capstone/include/capstone/m68k.h \
-    ../XCapstone/3rdparty/Capstone/include/capstone/mips.h \
-    ../XCapstone/3rdparty/Capstone/include/capstone/platform.h \
-    ../XCapstone/3rdparty/Capstone/include/capstone/ppc.h \
-    ../XCapstone/3rdparty/Capstone/include/capstone/sparc.h \
-    ../XCapstone/3rdparty/Capstone/include/capstone/systemz.h \
-    ../XCapstone/3rdparty/Capstone/include/capstone/tms320c64x.h \
-    ../XCapstone/3rdparty/Capstone/include/capstone/x86.h \
-    ../XCapstone/3rdparty/Capstone/include/capstone/xcore.h \
-    ../XCapstone/3rdparty/Capstone/include/platform.h \
+    ../XCapstone/3rdparty/Capstone/src/MCInst.h \
+    ../XCapstone/3rdparty/Capstone/src/MCRegisterInfo.h \
+    ../XCapstone/3rdparty/Capstone/src/SStream.h \
+    ../XCapstone/3rdparty/Capstone/src/arch/AArch64/AArch64AddressingModes.h \
+    ../XCapstone/3rdparty/Capstone/src/arch/AArch64/AArch64BaseInfo.h \
+    ../XCapstone/3rdparty/Capstone/src/arch/AArch64/AArch64Disassembler.h \
+    ../XCapstone/3rdparty/Capstone/src/arch/AArch64/AArch64GenDisassemblerTables.inc \
+    ../XCapstone/3rdparty/Capstone/src/arch/AArch64/AArch64InstPrinter.h \
+    ../XCapstone/3rdparty/Capstone/src/arch/AArch64/AArch64Mapping.h \
+    ../XCapstone/3rdparty/Capstone/src/arch/AArch64/AArch64MappingInsn.inc \
+    ../XCapstone/3rdparty/Capstone/src/arch/AArch64/AArch64Module.h \
+    ../XCapstone/3rdparty/Capstone/src/arch/ARM/ARMAddressingModes.h \
+    ../XCapstone/3rdparty/Capstone/src/arch/ARM/ARMBaseInfo.h \
+    ../XCapstone/3rdparty/Capstone/src/arch/ARM/ARMDisassembler.h \
+    ../XCapstone/3rdparty/Capstone/src/arch/ARM/ARMGenDisassemblerTables.inc \
+    ../XCapstone/3rdparty/Capstone/src/arch/ARM/ARMInstPrinter.h \
+    ../XCapstone/3rdparty/Capstone/src/arch/ARM/ARMMapping.h \
+    ../XCapstone/3rdparty/Capstone/src/arch/ARM/ARMMappingInsn.inc \
+    ../XCapstone/3rdparty/Capstone/src/arch/ARM/ARMModule.h \
+    ../XCapstone/3rdparty/Capstone/src/arch/EVM/EVMDisassembler.h \
+    ../XCapstone/3rdparty/Capstone/src/arch/EVM/EVMInstPrinter.h \
+    ../XCapstone/3rdparty/Capstone/src/arch/EVM/EVMMapping.h \
+    ../XCapstone/3rdparty/Capstone/src/arch/EVM/EVMModule.h \
+    ../XCapstone/3rdparty/Capstone/src/arch/M680X/M680XDisassembler.h \
+    ../XCapstone/3rdparty/Capstone/src/arch/M680X/M680XDisassemblerInternals.h \
+    ../XCapstone/3rdparty/Capstone/src/arch/M680X/M680XInstPrinter.h \
+    ../XCapstone/3rdparty/Capstone/src/arch/M680X/M680XModule.h \
+    ../XCapstone/3rdparty/Capstone/src/arch/M68K/M68KDisassembler.h \
+    ../XCapstone/3rdparty/Capstone/src/arch/M68K/M68KInstPrinter.h \
+    ../XCapstone/3rdparty/Capstone/src/arch/M68K/M68KModule.h \
+    ../XCapstone/3rdparty/Capstone/src/arch/Mips/MipsDisassembler.h \
+    ../XCapstone/3rdparty/Capstone/src/arch/Mips/MipsGenDisassemblerTables.inc \
+    ../XCapstone/3rdparty/Capstone/src/arch/Mips/MipsInstPrinter.h \
+    ../XCapstone/3rdparty/Capstone/src/arch/Mips/MipsMapping.h \
+    ../XCapstone/3rdparty/Capstone/src/arch/Mips/MipsMappingInsn.inc \
+    ../XCapstone/3rdparty/Capstone/src/arch/Mips/MipsModule.h \
+    ../XCapstone/3rdparty/Capstone/src/arch/PowerPC/PPCDisassembler.h \
+    ../XCapstone/3rdparty/Capstone/src/arch/PowerPC/PPCGenAsmWriter.inc \
+    ../XCapstone/3rdparty/Capstone/src/arch/PowerPC/PPCGenDisassemblerTables.inc \
+    ../XCapstone/3rdparty/Capstone/src/arch/PowerPC/PPCInstPrinter.h \
+    ../XCapstone/3rdparty/Capstone/src/arch/PowerPC/PPCMapping.h \
+    ../XCapstone/3rdparty/Capstone/src/arch/PowerPC/PPCMappingInsn.inc \
+    ../XCapstone/3rdparty/Capstone/src/arch/PowerPC/PPCModule.h \
+    ../XCapstone/3rdparty/Capstone/src/arch/PowerPC/PPCPredicates.h \
+    ../XCapstone/3rdparty/Capstone/src/arch/Sparc/Sparc.h \
+    ../XCapstone/3rdparty/Capstone/src/arch/Sparc/SparcDisassembler.h \
+    ../XCapstone/3rdparty/Capstone/src/arch/Sparc/SparcGenAsmWriter.inc \
+    ../XCapstone/3rdparty/Capstone/src/arch/Sparc/SparcGenDisassemblerTables.inc \
+    ../XCapstone/3rdparty/Capstone/src/arch/Sparc/SparcInstPrinter.h \
+    ../XCapstone/3rdparty/Capstone/src/arch/Sparc/SparcMapping.h \
+    ../XCapstone/3rdparty/Capstone/src/arch/Sparc/SparcMappingInsn.inc \
+    ../XCapstone/3rdparty/Capstone/src/arch/Sparc/SparcModule.h \
+    ../XCapstone/3rdparty/Capstone/src/arch/SystemZ/SystemZDisassembler.h \
+    ../XCapstone/3rdparty/Capstone/src/arch/SystemZ/SystemZGenAsmWriter.inc \
+    ../XCapstone/3rdparty/Capstone/src/arch/SystemZ/SystemZGenDisassemblerTables.inc \
+    ../XCapstone/3rdparty/Capstone/src/arch/SystemZ/SystemZInstPrinter.h \
+    ../XCapstone/3rdparty/Capstone/src/arch/SystemZ/SystemZMCTargetDesc.h \
+    ../XCapstone/3rdparty/Capstone/src/arch/SystemZ/SystemZMapping.h \
+    ../XCapstone/3rdparty/Capstone/src/arch/SystemZ/SystemZMappingInsn.inc \
+    ../XCapstone/3rdparty/Capstone/src/arch/SystemZ/SystemZModule.h \
+    ../XCapstone/3rdparty/Capstone/src/arch/TMS320C64x/TMS320C64xDisassembler.h \
+    ../XCapstone/3rdparty/Capstone/src/arch/TMS320C64x/TMS320C64xGenAsmWriter.inc \
+    ../XCapstone/3rdparty/Capstone/src/arch/TMS320C64x/TMS320C64xGenDisassemblerTables.inc \
+    ../XCapstone/3rdparty/Capstone/src/arch/TMS320C64x/TMS320C64xInstPrinter.h \
+    ../XCapstone/3rdparty/Capstone/src/arch/TMS320C64x/TMS320C64xMapping.h \
+    ../XCapstone/3rdparty/Capstone/src/arch/TMS320C64x/TMS320C64xModule.h \
+    ../XCapstone/3rdparty/Capstone/src/arch/X86/X86BaseInfo.h \
+    ../XCapstone/3rdparty/Capstone/src/arch/X86/X86Disassembler.h \
+    ../XCapstone/3rdparty/Capstone/src/arch/X86/X86DisassemblerDecoder.h \
+    ../XCapstone/3rdparty/Capstone/src/arch/X86/X86DisassemblerDecoderCommon.h \
+    ../XCapstone/3rdparty/Capstone/src/arch/X86/X86InstPrinter.h \
+    ../XCapstone/3rdparty/Capstone/src/arch/X86/X86Mapping.h \
+    ../XCapstone/3rdparty/Capstone/src/arch/X86/X86MappingInsn.inc \
+    ../XCapstone/3rdparty/Capstone/src/arch/X86/X86MappingInsn_reduce.inc \
+    ../XCapstone/3rdparty/Capstone/src/arch/X86/X86Module.h \
+    ../XCapstone/3rdparty/Capstone/src/arch/X86/qsort.h \
+    ../XCapstone/3rdparty/Capstone/src/arch/XCore/XCoreDisassembler.h \
+    ../XCapstone/3rdparty/Capstone/src/arch/XCore/XCoreGenAsmWriter.inc \
+    ../XCapstone/3rdparty/Capstone/src/arch/XCore/XCoreGenDisassemblerTables.inc \
+    ../XCapstone/3rdparty/Capstone/src/arch/XCore/XCoreInstPrinter.h \
+    ../XCapstone/3rdparty/Capstone/src/arch/XCore/XCoreMapping.h \
+    ../XCapstone/3rdparty/Capstone/src/arch/XCore/XCoreMappingInsn.inc \
+    ../XCapstone/3rdparty/Capstone/src/arch/XCore/XCoreModule.h \
+    ../XCapstone/3rdparty/Capstone/src/capstone/arm.h \
+    ../XCapstone/3rdparty/Capstone/src/capstone/arm64.h \
+    ../XCapstone/3rdparty/Capstone/src/capstone/capstone.h \
+    ../XCapstone/3rdparty/Capstone/src/capstone/evm.h \
+    ../XCapstone/3rdparty/Capstone/src/capstone/m680x.h \
+    ../XCapstone/3rdparty/Capstone/src/capstone/m68k.h \
+    ../XCapstone/3rdparty/Capstone/src/capstone/mips.h \
+    ../XCapstone/3rdparty/Capstone/src/capstone/platform.h \
+    ../XCapstone/3rdparty/Capstone/src/capstone/ppc.h \
+    ../XCapstone/3rdparty/Capstone/src/capstone/sparc.h \
+    ../XCapstone/3rdparty/Capstone/src/capstone/systemz.h \
+    ../XCapstone/3rdparty/Capstone/src/capstone/tms320c64x.h \
+    ../XCapstone/3rdparty/Capstone/src/capstone/x86.h \
+    ../XCapstone/3rdparty/Capstone/src/capstone/xcore.h \
+    ../XCapstone/3rdparty/Capstone/src/cs_priv.h \
+    ../XCapstone/3rdparty/Capstone/src/include/capstone/arm.h \
+    ../XCapstone/3rdparty/Capstone/src/include/capstone/arm64.h \
+    ../XCapstone/3rdparty/Capstone/src/include/capstone/capstone.h \
+    ../XCapstone/3rdparty/Capstone/src/include/capstone/evm.h \
+    ../XCapstone/3rdparty/Capstone/src/include/capstone/m680x.h \
+    ../XCapstone/3rdparty/Capstone/src/include/capstone/m68k.h \
+    ../XCapstone/3rdparty/Capstone/src/include/capstone/mips.h \
+    ../XCapstone/3rdparty/Capstone/src/include/capstone/platform.h \
+    ../XCapstone/3rdparty/Capstone/src/include/capstone/ppc.h \
+    ../XCapstone/3rdparty/Capstone/src/include/capstone/sparc.h \
+    ../XCapstone/3rdparty/Capstone/src/include/capstone/systemz.h \
+    ../XCapstone/3rdparty/Capstone/src/include/capstone/tms320c64x.h \
+    ../XCapstone/3rdparty/Capstone/src/include/capstone/x86.h \
+    ../XCapstone/3rdparty/Capstone/src/include/capstone/xcore.h \
+    ../XCapstone/3rdparty/Capstone/src/include/platform.h \
+    ../XCapstone/3rdparty/Capstone/src/utils.h \
     ../XCapstone/xcapstone.h \
     ../XDisasm/dialogdisasmlabels.h \
     ../XDisasm/dialogdisasmprocess.h \
+    ../XDisasm/dialogsignature.h \
     ../XDisasm/xdisasm.h \
     ../XDisasm/xdisasmmodel.h \
     ../XDisasm/xdisasmwidget.h \
-    ../XEntropyWidget/dialogentropyprocess.h \
-    ../XEntropyWidget/entropyprocess.h \
-    ../XEntropyWidget/xentropywidget.h \
-    ../XMemoryMapWidget/xmemorymapwidget.h \
     ../XOptions/xoptions.h \
-    ../XQwt/3rdparty/qwt/src/qwt.h \
-    ../XQwt/3rdparty/qwt/src/qwt_abstract_legend.h \
-    ../XQwt/3rdparty/qwt/src/qwt_abstract_scale.h \
-    ../XQwt/3rdparty/qwt/src/qwt_abstract_scale_draw.h \
-    ../XQwt/3rdparty/qwt/src/qwt_abstract_slider.h \
-    ../XQwt/3rdparty/qwt/src/qwt_analog_clock.h \
-    ../XQwt/3rdparty/qwt/src/qwt_arrow_button.h \
-    ../XQwt/3rdparty/qwt/src/qwt_clipper.h \
-    ../XQwt/3rdparty/qwt/src/qwt_color_map.h \
-    ../XQwt/3rdparty/qwt/src/qwt_column_symbol.h \
-    ../XQwt/3rdparty/qwt/src/qwt_compass.h \
-    ../XQwt/3rdparty/qwt/src/qwt_compass_rose.h \
-    ../XQwt/3rdparty/qwt/src/qwt_compat.h \
-    ../XQwt/3rdparty/qwt/src/qwt_counter.h \
-    ../XQwt/3rdparty/qwt/src/qwt_curve_fitter.h \
-    ../XQwt/3rdparty/qwt/src/qwt_date.h \
-    ../XQwt/3rdparty/qwt/src/qwt_date_scale_draw.h \
-    ../XQwt/3rdparty/qwt/src/qwt_date_scale_engine.h \
-    ../XQwt/3rdparty/qwt/src/qwt_dial.h \
-    ../XQwt/3rdparty/qwt/src/qwt_dial_needle.h \
-    ../XQwt/3rdparty/qwt/src/qwt_dyngrid_layout.h \
-    ../XQwt/3rdparty/qwt/src/qwt_event_pattern.h \
-    ../XQwt/3rdparty/qwt/src/qwt_global.h \
-    ../XQwt/3rdparty/qwt/src/qwt_graphic.h \
-    ../XQwt/3rdparty/qwt/src/qwt_interval.h \
-    ../XQwt/3rdparty/qwt/src/qwt_interval_symbol.h \
-    ../XQwt/3rdparty/qwt/src/qwt_knob.h \
-    ../XQwt/3rdparty/qwt/src/qwt_legend.h \
-    ../XQwt/3rdparty/qwt/src/qwt_legend_data.h \
-    ../XQwt/3rdparty/qwt/src/qwt_legend_label.h \
-    ../XQwt/3rdparty/qwt/src/qwt_magnifier.h \
-    ../XQwt/3rdparty/qwt/src/qwt_math.h \
-    ../XQwt/3rdparty/qwt/src/qwt_matrix_raster_data.h \
-    ../XQwt/3rdparty/qwt/src/qwt_null_paintdevice.h \
-    ../XQwt/3rdparty/qwt/src/qwt_painter.h \
-    ../XQwt/3rdparty/qwt/src/qwt_painter_command.h \
-    ../XQwt/3rdparty/qwt/src/qwt_panner.h \
-    ../XQwt/3rdparty/qwt/src/qwt_picker.h \
-    ../XQwt/3rdparty/qwt/src/qwt_picker_machine.h \
-    ../XQwt/3rdparty/qwt/src/qwt_pixel_matrix.h \
-    ../XQwt/3rdparty/qwt/src/qwt_plot.h \
-    ../XQwt/3rdparty/qwt/src/qwt_plot_abstract_barchart.h \
-    ../XQwt/3rdparty/qwt/src/qwt_plot_barchart.h \
-    ../XQwt/3rdparty/qwt/src/qwt_plot_canvas.h \
-    ../XQwt/3rdparty/qwt/src/qwt_plot_curve.h \
-    ../XQwt/3rdparty/qwt/src/qwt_plot_dict.h \
-    ../XQwt/3rdparty/qwt/src/qwt_plot_directpainter.h \
-    ../XQwt/3rdparty/qwt/src/qwt_plot_glcanvas.h \
-    ../XQwt/3rdparty/qwt/src/qwt_plot_grid.h \
-    ../XQwt/3rdparty/qwt/src/qwt_plot_histogram.h \
-    ../XQwt/3rdparty/qwt/src/qwt_plot_intervalcurve.h \
-    ../XQwt/3rdparty/qwt/src/qwt_plot_item.h \
-    ../XQwt/3rdparty/qwt/src/qwt_plot_layout.h \
-    ../XQwt/3rdparty/qwt/src/qwt_plot_legenditem.h \
-    ../XQwt/3rdparty/qwt/src/qwt_plot_magnifier.h \
-    ../XQwt/3rdparty/qwt/src/qwt_plot_marker.h \
-    ../XQwt/3rdparty/qwt/src/qwt_plot_multi_barchart.h \
-    ../XQwt/3rdparty/qwt/src/qwt_plot_panner.h \
-    ../XQwt/3rdparty/qwt/src/qwt_plot_picker.h \
-    ../XQwt/3rdparty/qwt/src/qwt_plot_rasteritem.h \
-    ../XQwt/3rdparty/qwt/src/qwt_plot_renderer.h \
-    ../XQwt/3rdparty/qwt/src/qwt_plot_rescaler.h \
-    ../XQwt/3rdparty/qwt/src/qwt_plot_scaleitem.h \
-    ../XQwt/3rdparty/qwt/src/qwt_plot_seriesitem.h \
-    ../XQwt/3rdparty/qwt/src/qwt_plot_shapeitem.h \
-    ../XQwt/3rdparty/qwt/src/qwt_plot_spectrocurve.h \
-    ../XQwt/3rdparty/qwt/src/qwt_plot_spectrogram.h \
-    ../XQwt/3rdparty/qwt/src/qwt_plot_svgitem.h \
-    ../XQwt/3rdparty/qwt/src/qwt_plot_textlabel.h \
-    ../XQwt/3rdparty/qwt/src/qwt_plot_tradingcurve.h \
-    ../XQwt/3rdparty/qwt/src/qwt_plot_zoneitem.h \
-    ../XQwt/3rdparty/qwt/src/qwt_plot_zoomer.h \
-    ../XQwt/3rdparty/qwt/src/qwt_point_3d.h \
-    ../XQwt/3rdparty/qwt/src/qwt_point_data.h \
-    ../XQwt/3rdparty/qwt/src/qwt_point_mapper.h \
-    ../XQwt/3rdparty/qwt/src/qwt_point_polar.h \
-    ../XQwt/3rdparty/qwt/src/qwt_raster_data.h \
-    ../XQwt/3rdparty/qwt/src/qwt_round_scale_draw.h \
-    ../XQwt/3rdparty/qwt/src/qwt_samples.h \
-    ../XQwt/3rdparty/qwt/src/qwt_sampling_thread.h \
-    ../XQwt/3rdparty/qwt/src/qwt_scale_div.h \
-    ../XQwt/3rdparty/qwt/src/qwt_scale_draw.h \
-    ../XQwt/3rdparty/qwt/src/qwt_scale_engine.h \
-    ../XQwt/3rdparty/qwt/src/qwt_scale_map.h \
-    ../XQwt/3rdparty/qwt/src/qwt_scale_widget.h \
-    ../XQwt/3rdparty/qwt/src/qwt_series_data.h \
-    ../XQwt/3rdparty/qwt/src/qwt_series_store.h \
-    ../XQwt/3rdparty/qwt/src/qwt_slider.h \
-    ../XQwt/3rdparty/qwt/src/qwt_spline.h \
-    ../XQwt/3rdparty/qwt/src/qwt_symbol.h \
-    ../XQwt/3rdparty/qwt/src/qwt_system_clock.h \
-    ../XQwt/3rdparty/qwt/src/qwt_text.h \
-    ../XQwt/3rdparty/qwt/src/qwt_text_engine.h \
-    ../XQwt/3rdparty/qwt/src/qwt_text_label.h \
-    ../XQwt/3rdparty/qwt/src/qwt_thermo.h \
-    ../XQwt/3rdparty/qwt/src/qwt_transform.h \
-    ../XQwt/3rdparty/qwt/src/qwt_wheel.h \
-    ../XQwt/3rdparty/qwt/src/qwt_widget_overlay.h \
     ../global.h \
     dialogabout.h \
     dialogoptions.h \
@@ -267,6 +256,7 @@ SOURCES += \
     ../Controls/xlineedithex.cpp \
     ../FormatDialogs/dialogdumpprocess.cpp \
     ../FormatDialogs/dialoggotoaddress.cpp \
+    ../FormatDialogs/dialoghexsignature.cpp \
     ../FormatDialogs/dialogsearch.cpp \
     ../FormatDialogs/dialogsearchprocess.cpp \
     ../FormatDialogs/dialogsearchstrings.cpp \
@@ -306,7 +296,6 @@ SOURCES += \
     ../FormatWidgets/PE/sectionheaderwidget.cpp \
     ../FormatWidgets/SearchStrings/searchstringswidget.cpp \
     ../FormatWidgets/dialogentropy.cpp \
-    ../FormatWidgets/dialoghex.cpp \
     ../FormatWidgets/dialogprocessdata.cpp \
     ../FormatWidgets/dialogsectionheader.cpp \
     ../FormatWidgets/formatwidget.cpp \
@@ -315,6 +304,7 @@ SOURCES += \
     ../FormatWidgets/toolswidget.cpp \
     ../Formats/subdevice.cpp \
     ../Formats/xbinary.cpp \
+    ../Formats/xcom.cpp \
     ../Formats/xelf.cpp \
     ../Formats/xformats.cpp \
     ../Formats/xle.cpp \
@@ -322,125 +312,75 @@ SOURCES += \
     ../Formats/xmsdos.cpp \
     ../Formats/xne.cpp \
     ../Formats/xpe.cpp \
+    ../QHexView/dialoghex.cpp \
     ../QHexView/qhexview.cpp \
     ../QHexView/qhexviewwidget.cpp \
-    ../SpecAbstract/signatures.cpp \
-    ../SpecAbstract/specabstract.cpp \
-    ../StaticScan/dialogstaticscan.cpp \
-    ../StaticScan/formresult.cpp \
-    ../StaticScan/formstaticscan.cpp \
-    ../StaticScan/heurwidget.cpp \
-    ../StaticScan/staticscan.cpp \
-    ../StaticScan/staticscanitem.cpp \
-    ../StaticScan/staticscanitemmodel.cpp \
+    ../XCapstone/3rdparty/Capstone/src/MCInst.c \
+    ../XCapstone/3rdparty/Capstone/src/MCRegisterInfo.c \
+    ../XCapstone/3rdparty/Capstone/src/SStream.c \
+    ../XCapstone/3rdparty/Capstone/src/arch/AArch64/AArch64BaseInfo.c \
+    ../XCapstone/3rdparty/Capstone/src/arch/AArch64/AArch64Disassembler.c \
+    ../XCapstone/3rdparty/Capstone/src/arch/AArch64/AArch64InstPrinter.c \
+    ../XCapstone/3rdparty/Capstone/src/arch/AArch64/AArch64Mapping.c \
+    ../XCapstone/3rdparty/Capstone/src/arch/AArch64/AArch64Module.c \
+    ../XCapstone/3rdparty/Capstone/src/arch/ARM/ARMDisassembler.c \
+    ../XCapstone/3rdparty/Capstone/src/arch/ARM/ARMInstPrinter.c \
+    ../XCapstone/3rdparty/Capstone/src/arch/ARM/ARMMapping.c \
+    ../XCapstone/3rdparty/Capstone/src/arch/ARM/ARMModule.c \
+    ../XCapstone/3rdparty/Capstone/src/arch/EVM/EVMDisassembler.c \
+    ../XCapstone/3rdparty/Capstone/src/arch/EVM/EVMInstPrinter.c \
+    ../XCapstone/3rdparty/Capstone/src/arch/EVM/EVMMapping.c \
+    ../XCapstone/3rdparty/Capstone/src/arch/EVM/EVMModule.c \
+    ../XCapstone/3rdparty/Capstone/src/arch/M680X/M680XDisassembler.c \
+    ../XCapstone/3rdparty/Capstone/src/arch/M680X/M680XInstPrinter.c \
+    ../XCapstone/3rdparty/Capstone/src/arch/M680X/M680XModule.c \
+    ../XCapstone/3rdparty/Capstone/src/arch/M68K/M68KDisassembler.c \
+    ../XCapstone/3rdparty/Capstone/src/arch/M68K/M68KInstPrinter.c \
+    ../XCapstone/3rdparty/Capstone/src/arch/M68K/M68KModule.c \
+    ../XCapstone/3rdparty/Capstone/src/arch/Mips/MipsDisassembler.c \
+    ../XCapstone/3rdparty/Capstone/src/arch/Mips/MipsInstPrinter.c \
+    ../XCapstone/3rdparty/Capstone/src/arch/Mips/MipsMapping.c \
+    ../XCapstone/3rdparty/Capstone/src/arch/Mips/MipsModule.c \
+    ../XCapstone/3rdparty/Capstone/src/arch/PowerPC/PPCDisassembler.c \
+    ../XCapstone/3rdparty/Capstone/src/arch/PowerPC/PPCInstPrinter.c \
+    ../XCapstone/3rdparty/Capstone/src/arch/PowerPC/PPCMapping.c \
+    ../XCapstone/3rdparty/Capstone/src/arch/PowerPC/PPCModule.c \
+    ../XCapstone/3rdparty/Capstone/src/arch/Sparc/SparcDisassembler.c \
+    ../XCapstone/3rdparty/Capstone/src/arch/Sparc/SparcInstPrinter.c \
+    ../XCapstone/3rdparty/Capstone/src/arch/Sparc/SparcMapping.c \
+    ../XCapstone/3rdparty/Capstone/src/arch/Sparc/SparcModule.c \
+    ../XCapstone/3rdparty/Capstone/src/arch/SystemZ/SystemZDisassembler.c \
+    ../XCapstone/3rdparty/Capstone/src/arch/SystemZ/SystemZInstPrinter.c \
+    ../XCapstone/3rdparty/Capstone/src/arch/SystemZ/SystemZMCTargetDesc.c \
+    ../XCapstone/3rdparty/Capstone/src/arch/SystemZ/SystemZMapping.c \
+    ../XCapstone/3rdparty/Capstone/src/arch/SystemZ/SystemZModule.c \
+    ../XCapstone/3rdparty/Capstone/src/arch/TMS320C64x/TMS320C64xDisassembler.c \
+    ../XCapstone/3rdparty/Capstone/src/arch/TMS320C64x/TMS320C64xInstPrinter.c \
+    ../XCapstone/3rdparty/Capstone/src/arch/TMS320C64x/TMS320C64xMapping.c \
+    ../XCapstone/3rdparty/Capstone/src/arch/TMS320C64x/TMS320C64xModule.c \
+    ../XCapstone/3rdparty/Capstone/src/arch/X86/X86ATTInstPrinter.c \
+    ../XCapstone/3rdparty/Capstone/src/arch/X86/X86Disassembler.c \
+    ../XCapstone/3rdparty/Capstone/src/arch/X86/X86DisassemblerDecoder.c \
+    ../XCapstone/3rdparty/Capstone/src/arch/X86/X86IntelInstPrinter.c \
+    ../XCapstone/3rdparty/Capstone/src/arch/X86/X86Mapping.c \
+    ../XCapstone/3rdparty/Capstone/src/arch/X86/X86Module.c \
+    ../XCapstone/3rdparty/Capstone/src/arch/XCore/XCoreDisassembler.c \
+    ../XCapstone/3rdparty/Capstone/src/arch/XCore/XCoreInstPrinter.c \
+    ../XCapstone/3rdparty/Capstone/src/arch/XCore/XCoreMapping.c \
+    ../XCapstone/3rdparty/Capstone/src/arch/XCore/XCoreModule.c \
+    ../XCapstone/3rdparty/Capstone/src/cs.c \
+    ../XCapstone/3rdparty/Capstone/src/utils.c \
     ../XCapstone/xcapstone.cpp \
     ../XDisasm/dialogdisasmlabels.cpp \
     ../XDisasm/dialogdisasmprocess.cpp \
+    ../XDisasm/dialogsignature.cpp \
     ../XDisasm/xdisasm.cpp \
     ../XDisasm/xdisasmmodel.cpp \
     ../XDisasm/xdisasmwidget.cpp \
-    ../XEntropyWidget/dialogentropyprocess.cpp \
-    ../XEntropyWidget/entropyprocess.cpp \
-    ../XEntropyWidget/xentropywidget.cpp \
-    ../XMemoryMapWidget/xmemorymapwidget.cpp \
     ../XOptions/xoptions.cpp \
-    ../XQwt/3rdparty/qwt/src/qwt_abstract_legend.cpp \
-    ../XQwt/3rdparty/qwt/src/qwt_abstract_scale.cpp \
-    ../XQwt/3rdparty/qwt/src/qwt_abstract_scale_draw.cpp \
-    ../XQwt/3rdparty/qwt/src/qwt_abstract_slider.cpp \
-    ../XQwt/3rdparty/qwt/src/qwt_analog_clock.cpp \
-    ../XQwt/3rdparty/qwt/src/qwt_arrow_button.cpp \
-    ../XQwt/3rdparty/qwt/src/qwt_clipper.cpp \
-    ../XQwt/3rdparty/qwt/src/qwt_color_map.cpp \
-    ../XQwt/3rdparty/qwt/src/qwt_column_symbol.cpp \
-    ../XQwt/3rdparty/qwt/src/qwt_compass.cpp \
-    ../XQwt/3rdparty/qwt/src/qwt_compass_rose.cpp \
-    ../XQwt/3rdparty/qwt/src/qwt_counter.cpp \
-    ../XQwt/3rdparty/qwt/src/qwt_curve_fitter.cpp \
-    ../XQwt/3rdparty/qwt/src/qwt_date.cpp \
-    ../XQwt/3rdparty/qwt/src/qwt_date_scale_draw.cpp \
-    ../XQwt/3rdparty/qwt/src/qwt_date_scale_engine.cpp \
-    ../XQwt/3rdparty/qwt/src/qwt_dial.cpp \
-    ../XQwt/3rdparty/qwt/src/qwt_dial_needle.cpp \
-    ../XQwt/3rdparty/qwt/src/qwt_dyngrid_layout.cpp \
-    ../XQwt/3rdparty/qwt/src/qwt_event_pattern.cpp \
-    ../XQwt/3rdparty/qwt/src/qwt_graphic.cpp \
-    ../XQwt/3rdparty/qwt/src/qwt_interval.cpp \
-    ../XQwt/3rdparty/qwt/src/qwt_interval_symbol.cpp \
-    ../XQwt/3rdparty/qwt/src/qwt_knob.cpp \
-    ../XQwt/3rdparty/qwt/src/qwt_legend.cpp \
-    ../XQwt/3rdparty/qwt/src/qwt_legend_data.cpp \
-    ../XQwt/3rdparty/qwt/src/qwt_legend_label.cpp \
-    ../XQwt/3rdparty/qwt/src/qwt_magnifier.cpp \
-    ../XQwt/3rdparty/qwt/src/qwt_math.cpp \
-    ../XQwt/3rdparty/qwt/src/qwt_matrix_raster_data.cpp \
-    ../XQwt/3rdparty/qwt/src/qwt_null_paintdevice.cpp \
-    ../XQwt/3rdparty/qwt/src/qwt_painter.cpp \
-    ../XQwt/3rdparty/qwt/src/qwt_painter_command.cpp \
-    ../XQwt/3rdparty/qwt/src/qwt_panner.cpp \
-    ../XQwt/3rdparty/qwt/src/qwt_picker.cpp \
-    ../XQwt/3rdparty/qwt/src/qwt_picker_machine.cpp \
-    ../XQwt/3rdparty/qwt/src/qwt_pixel_matrix.cpp \
-    ../XQwt/3rdparty/qwt/src/qwt_plot.cpp \
-    ../XQwt/3rdparty/qwt/src/qwt_plot_abstract_barchart.cpp \
-    ../XQwt/3rdparty/qwt/src/qwt_plot_axis.cpp \
-    ../XQwt/3rdparty/qwt/src/qwt_plot_barchart.cpp \
-    ../XQwt/3rdparty/qwt/src/qwt_plot_canvas.cpp \
-    ../XQwt/3rdparty/qwt/src/qwt_plot_curve.cpp \
-    ../XQwt/3rdparty/qwt/src/qwt_plot_dict.cpp \
-    ../XQwt/3rdparty/qwt/src/qwt_plot_directpainter.cpp \
-    ../XQwt/3rdparty/qwt/src/qwt_plot_glcanvas.cpp \
-    ../XQwt/3rdparty/qwt/src/qwt_plot_grid.cpp \
-    ../XQwt/3rdparty/qwt/src/qwt_plot_histogram.cpp \
-    ../XQwt/3rdparty/qwt/src/qwt_plot_intervalcurve.cpp \
-    ../XQwt/3rdparty/qwt/src/qwt_plot_item.cpp \
-    ../XQwt/3rdparty/qwt/src/qwt_plot_layout.cpp \
-    ../XQwt/3rdparty/qwt/src/qwt_plot_legenditem.cpp \
-    ../XQwt/3rdparty/qwt/src/qwt_plot_magnifier.cpp \
-    ../XQwt/3rdparty/qwt/src/qwt_plot_marker.cpp \
-    ../XQwt/3rdparty/qwt/src/qwt_plot_multi_barchart.cpp \
-    ../XQwt/3rdparty/qwt/src/qwt_plot_panner.cpp \
-    ../XQwt/3rdparty/qwt/src/qwt_plot_picker.cpp \
-    ../XQwt/3rdparty/qwt/src/qwt_plot_rasteritem.cpp \
-    ../XQwt/3rdparty/qwt/src/qwt_plot_renderer.cpp \
-    ../XQwt/3rdparty/qwt/src/qwt_plot_rescaler.cpp \
-    ../XQwt/3rdparty/qwt/src/qwt_plot_scaleitem.cpp \
-    ../XQwt/3rdparty/qwt/src/qwt_plot_seriesitem.cpp \
-    ../XQwt/3rdparty/qwt/src/qwt_plot_shapeitem.cpp \
-    ../XQwt/3rdparty/qwt/src/qwt_plot_spectrocurve.cpp \
-    ../XQwt/3rdparty/qwt/src/qwt_plot_spectrogram.cpp \
-    ../XQwt/3rdparty/qwt/src/qwt_plot_svgitem.cpp \
-    ../XQwt/3rdparty/qwt/src/qwt_plot_textlabel.cpp \
-    ../XQwt/3rdparty/qwt/src/qwt_plot_tradingcurve.cpp \
-    ../XQwt/3rdparty/qwt/src/qwt_plot_xml.cpp \
-    ../XQwt/3rdparty/qwt/src/qwt_plot_zoneitem.cpp \
-    ../XQwt/3rdparty/qwt/src/qwt_plot_zoomer.cpp \
-    ../XQwt/3rdparty/qwt/src/qwt_point_3d.cpp \
-    ../XQwt/3rdparty/qwt/src/qwt_point_data.cpp \
-    ../XQwt/3rdparty/qwt/src/qwt_point_mapper.cpp \
-    ../XQwt/3rdparty/qwt/src/qwt_point_polar.cpp \
-    ../XQwt/3rdparty/qwt/src/qwt_raster_data.cpp \
-    ../XQwt/3rdparty/qwt/src/qwt_round_scale_draw.cpp \
-    ../XQwt/3rdparty/qwt/src/qwt_sampling_thread.cpp \
-    ../XQwt/3rdparty/qwt/src/qwt_scale_div.cpp \
-    ../XQwt/3rdparty/qwt/src/qwt_scale_draw.cpp \
-    ../XQwt/3rdparty/qwt/src/qwt_scale_engine.cpp \
-    ../XQwt/3rdparty/qwt/src/qwt_scale_map.cpp \
-    ../XQwt/3rdparty/qwt/src/qwt_scale_widget.cpp \
-    ../XQwt/3rdparty/qwt/src/qwt_series_data.cpp \
-    ../XQwt/3rdparty/qwt/src/qwt_slider.cpp \
-    ../XQwt/3rdparty/qwt/src/qwt_spline.cpp \
-    ../XQwt/3rdparty/qwt/src/qwt_symbol.cpp \
-    ../XQwt/3rdparty/qwt/src/qwt_system_clock.cpp \
-    ../XQwt/3rdparty/qwt/src/qwt_text.cpp \
-    ../XQwt/3rdparty/qwt/src/qwt_text_engine.cpp \
-    ../XQwt/3rdparty/qwt/src/qwt_text_label.cpp \
-    ../XQwt/3rdparty/qwt/src/qwt_thermo.cpp \
-    ../XQwt/3rdparty/qwt/src/qwt_transform.cpp \
-    ../XQwt/3rdparty/qwt/src/qwt_wheel.cpp \
-    ../XQwt/3rdparty/qwt/src/qwt_widget_overlay.cpp \
     dialogabout.cpp \
     dialogoptions.cpp \
     guimainwindow.cpp \
-    main_gui.cpp
+    main_gui.cpp \
+    ../winloader_source/winloader.cpp
 
