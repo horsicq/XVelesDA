@@ -12,7 +12,7 @@ set /p RELEASE_VERSION=<%SOURCE_PATH%\release_version.txt
 set QT_PATH=%QT_PATH%
 set QT_SPEC=win32-msvc2013
 call %VS_PATH%\VC\bin\vcvars32.bat
-set GUIEXE=xpeviewer.exe
+set GUIEXE=xvelesda.exe
 set ZIP_NAME=%BUILD_NAME%_%RELEASE_VERSION%
 set RES_FILE=rsrc
 
