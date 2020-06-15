@@ -33,12 +33,12 @@ cd $SOURCE_PATH/gui_source
 $QT_PATH/bin/lupdate gui_source_tr.pro
 cd $SOURCE_PATH
 
-mkdir -p release
-rm -rf release/$BUILD_NAME
-mkdir -p release/$BUILD_NAME
-mkdir -p release/$BUILD_NAME/base
-mkdir -p release/$BUILD_NAME/base/lang
-mkdir -p release/$BUILD_NAME/base/platforms
+mkdir -p $SOURCE_PATH/release
+rm -rf $SOURCE_PATH/release/$BUILD_NAME
+mkdir -p $SOURCE_PATH/release/$BUILD_NAME
+mkdir -p $SOURCE_PATH/release/$BUILD_NAME/base
+mkdir -p $SOURCE_PATH/release/$BUILD_NAME/base/lang
+mkdir -p $SOURCE_PATH/release/$BUILD_NAME/base/platforms
 
 cp -R $QT_PATH/plugins/platforms/libqxcb.so                     $SOURCE_PATH/release/$BUILD_NAME/base/platforms/
 
@@ -64,9 +64,11 @@ mv $SOURCE_PATH/release/$BUILD_NAME/base/libicui18n.so.56.1                 $SOU
 mv $SOURCE_PATH/release/$BUILD_NAME/base/libicuuc.so.56.1                   $SOURCE_PATH/release/$BUILD_NAME/base/libicuuc.so.56
 mv $SOURCE_PATH/release/$BUILD_NAME/base/libicudata.so.56.1                 $SOURCE_PATH/release/$BUILD_NAME/base/libicudata.so.56
 
-cp -Rfu $SOURCE_PATH/XStyles/qss $SOURCE_PATH/release/$BUILD_NAME/base/qss
+cp -Rfu $SOURCE_PATH/XStyles/qss/ $SOURCE_PATH/release/$BUILD_NAME/base/qss/
 
 $QT_PATH/bin/lrelease  $SOURCE_PATH/gui_source/translation/xvelesda_vi.ts -qm  $SOURCE_PATH/release/$BUILD_NAME/base/lang/xvelesda_vi.qm
+$QT_PATH/bin/lrelease  $SOURCE_PATH/gui_source/translation/xvelesda_zh.ts -qm  $SOURCE_PATH/release/$BUILD_NAME/base/lang/xvelesda_zh.qm
+$QT_PATH/bin/lrelease  $SOURCE_PATH/gui_source/translation/xvelesda_zh_TW.ts -qm  $SOURCE_PATH/release/$BUILD_NAME/base/lang/xvelesda_zh_TW.qm
 
 echo "#!/bin/sh" >> release/$BUILD_NAME/xvelesda.sh
 echo "export LD_LIBRARY_PATH=\"./base:$LD_LIBRARY_PATH\"" >> release/$BUILD_NAME/xvelesda.sh

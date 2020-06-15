@@ -95,6 +95,14 @@ copyplugin platforms libqcocoa
 copyplugin platforms libqminimal
 copyplugin platforms libqoffscreen
 
+mkdir -p $SOURCE_PATH/release/$BUILD_NAME/$GUIEXE.app/Contents/Resources/lang
+
+cp -Rf $SOURCE_PATH/XStyles/qss $SOURCE_PATH/release/$BUILD_NAME/$GUIEXE.app/Contents/Resources/
+
+$QT_PATH/bin/lrelease  $SOURCE_PATH/gui_source/translation/xvelesda_vi.ts -qm  $SOURCE_PATH/release/$BUILD_NAME/$GUIEXE.app/Contents/Resources/lang/xvelesda_vi.qm
+$QT_PATH/bin/lrelease  $SOURCE_PATH/gui_source/translation/xvelesda_zh.ts -qm  $SOURCE_PATH/release/$BUILD_NAME/$GUIEXE.app/Contents/Resources/lang/xvelesda_zh.qm
+$QT_PATH/bin/lrelease  $SOURCE_PATH/gui_source/translation/xvelesda_zh_TW.ts -qm  $SOURCE_PATH/release/$BUILD_NAME/$GUIEXE.app/Contents/Resources/lang/xvelesda_zh_TW.qm
+
 rm -rf $SOURCE_PATH/release/${BUILD_NAME}_${RELEASE_VERSION}.dmg
 hdiutil create -format UDBZ -quiet -srcfolder $SOURCE_PATH/release/$BUILD_NAME $SOURCE_PATH/release/${BUILD_NAME}_${RELEASE_VERSION}.dmg
 cd $SOURCE_PATH/release/

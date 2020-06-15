@@ -12,7 +12,7 @@ set /p RELEASE_VERSION=<%SOURCE_PATH%\release_version.txt
 set QT_PATH=%QT_PATH%
 set QT_SPEC=win32-msvc2013
 call %VS_PATH%\VC\bin\vcvars32.bat
-set GUIEXE=xvelesda.exe
+set GUIEXE=xpeviewer.exe
 set ZIP_NAME=%BUILD_NAME%_%RELEASE_VERSION%
 set RES_FILE=rsrc
 
@@ -68,14 +68,14 @@ copy %VS_PATH%\VC\redist\x86\Microsoft.VC120.CRT\msvcr120.dll %SOURCE_PATH%\rele
 
 xcopy %SOURCE_PATH%\XStyles\qss %SOURCE_PATH%\release\%BUILD_NAME%\base\qss /E /I
 
-rem %QT_PATH%\bin\lrelease.exe %SOURCE_PATH%\gui_source\translation\xvelesda_de.ts -qm %SOURCE_PATH%\release\%BUILD_NAME%\base\lang\xvelesda_de.qm
-rem %QT_PATH%\bin\lrelease.exe %SOURCE_PATH%\gui_source\translation\xvelesda_es.ts -qm %SOURCE_PATH%\release\%BUILD_NAME%\base\lang\xvelesda_es.qm
-rem %QT_PATH%\bin\lrelease.exe %SOURCE_PATH%\gui_source\translation\xvelesda_ja.ts -qm %SOURCE_PATH%\release\%BUILD_NAME%\base\lang\xvelesda_ja.qm
-rem %QT_PATH%\bin\lrelease.exe %SOURCE_PATH%\gui_source\translation\xvelesda_pl.ts -qm %SOURCE_PATH%\release\%BUILD_NAME%\base\lang\xvelesda_pl.qm
-rem %QT_PATH%\bin\lrelease.exe %SOURCE_PATH%\gui_source\translation\xvelesda_ru.ts -qm %SOURCE_PATH%\release\%BUILD_NAME%\base\lang\xvelesda_ru.qm
+rem %QT_PATH%\bin\lrelease.exe %SOURCE_PATH%\gui_source\translation\xpeviewer_de.ts -qm %SOURCE_PATH%\release\%BUILD_NAME%\base\lang\xpeviewer_de.qm
+rem %QT_PATH%\bin\lrelease.exe %SOURCE_PATH%\gui_source\translation\xpeviewer_es.ts -qm %SOURCE_PATH%\release\%BUILD_NAME%\base\lang\xpeviewer_es.qm
+rem %QT_PATH%\bin\lrelease.exe %SOURCE_PATH%\gui_source\translation\xpeviewer_ja.ts -qm %SOURCE_PATH%\release\%BUILD_NAME%\base\lang\xpeviewer_ja.qm
+rem %QT_PATH%\bin\lrelease.exe %SOURCE_PATH%\gui_source\translation\xpeviewer_pl.ts -qm %SOURCE_PATH%\release\%BUILD_NAME%\base\lang\xpeviewer_pl.qm
+rem %QT_PATH%\bin\lrelease.exe %SOURCE_PATH%\gui_source\translation\xpeviewer_ru.ts -qm %SOURCE_PATH%\release\%BUILD_NAME%\base\lang\xpeviewer_ru.qm
 %QT_PATH%\bin\lrelease.exe %SOURCE_PATH%\gui_source\translation\xvelesda_vi.ts -qm %SOURCE_PATH%\release\%BUILD_NAME%\base\lang\xvelesda_vi.qm
-rem %QT_PATH%\bin\lrelease.exe %SOURCE_PATH%\gui_source\translation\xvelesda_zh.ts -qm %SOURCE_PATH%\release\%BUILD_NAME%\base\lang\xvelesda_zh.qm
-rem %QT_PATH%\bin\lrelease.exe %SOURCE_PATH%\gui_source\translation\xvelesda_zh_TW.ts -qm %SOURCE_PATH%\release\%BUILD_NAME%\base\lang\xvelesda_zh_TW.qm
+%QT_PATH%\bin\lrelease.exe %SOURCE_PATH%\gui_source\translation\xvelesda_zh.ts -qm %SOURCE_PATH%\release\%BUILD_NAME%\base\lang\xvelesda_zh.qm
+%QT_PATH%\bin\lrelease.exe %SOURCE_PATH%\gui_source\translation\xvelesda_zh_TW.ts -qm %SOURCE_PATH%\release\%BUILD_NAME%\base\lang\xvelesda_zh_TW.qm
 
 cd %SOURCE_PATH%\release
 if exist %ZIP_NAME%.zip del %ZIP_NAME%.zip

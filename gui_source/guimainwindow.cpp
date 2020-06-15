@@ -143,14 +143,9 @@ void GuiMainWindow::processFile(QString sFileName, bool bReload)
         {
             ui->stackedWidgetMain->setCurrentIndex(1);
 
-            ui->widgetViewer->setData(pFile);
+            ui->widgetViewer->setData(pFile,0,0,bReload);
 
             adjust();
-
-            if(bReload)
-            {
-                ui->widgetViewer->analyze();
-            }
 
             setWindowTitle(sFileName);
         }
