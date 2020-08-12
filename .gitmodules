@@ -28,3 +28,6 @@
 [submodule "XCapstone"]
 	path = XCapstone
 	url = https://github.com/horsicq/XCapstone.git
+[submodule "XHashWidget"]
+	path = XHashWidget
+	url = https://github.com/horsicq/XHashWidget.git
