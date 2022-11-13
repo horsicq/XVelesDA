@@ -21,27 +21,25 @@
 #ifndef GUIMAINWINDOW_H
 #define GUIMAINWINDOW_H
 
+#include <QDragEnterEvent>
+#include <QFileDialog>
 #include <QMainWindow>
+#include <QMimeData>
 
 #include "../global.h"
-#include <QMainWindow>
-#include <QFileDialog>
-#include <QDragEnterEvent>
-#include <QMimeData>
-#include "dialogoptions.h"
 #include "dialogabout.h"
+#include "dialogoptions.h"
 #include "xdisasmwidget.h"
 
 namespace Ui {
 class GuiMainWindow;
 }
 
-class GuiMainWindow : public QMainWindow
-{
+class GuiMainWindow : public QMainWindow {
     Q_OBJECT
 
 public:
-    explicit GuiMainWindow(QWidget *parent=nullptr);
+    explicit GuiMainWindow(QWidget *parent = nullptr);
     ~GuiMainWindow();
 
 private slots:
@@ -51,7 +49,7 @@ private slots:
     void on_actionOptions_triggered();
     void on_actionAbout_triggered();
     void adjust();
-    void processFile(QString sFileName,bool bReload);
+    void processFile(QString sFileName, bool bReload);
     void closeCurrentFile();
 
 protected:
@@ -66,4 +64,4 @@ private:
     QFile *pFile;
 };
 
-#endif // GUIMAINWINDOW_H
+#endif  // GUIMAINWINDOW_H

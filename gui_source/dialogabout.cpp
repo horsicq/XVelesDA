@@ -19,27 +19,21 @@
 // SOFTWARE.
 //
 #include "dialogabout.h"
+
 #include "ui_dialogabout.h"
 
-DialogAbout::DialogAbout(QWidget *parent) :
-    QDialog(parent),
-    ui(new Ui::DialogAbout)
-{
+DialogAbout::DialogAbout(QWidget *parent) : QDialog(parent), ui(new Ui::DialogAbout) {
     ui->setupUi(this);
 
     ui->labelLogo->setPixmap(QPixmap(QString::fromUtf8(":/pics/logo.png")));
 
-    ui->labelVersion->setText(QString("<span style=\" font-weight:600;\">%1 %2</span>")
-                              .arg(QApplication::applicationName())
-                              .arg(QApplication::applicationVersion()));
+    ui->labelVersion->setText(QString("<span style=\" font-weight:600;\">%1 %2</span>").arg(QApplication::applicationName()).arg(QApplication::applicationVersion()));
 }
 
-DialogAbout::~DialogAbout()
-{
+DialogAbout::~DialogAbout() {
     delete ui;
 }
 
-void DialogAbout::on_pushButtonOK_clicked()
-{
+void DialogAbout::on_pushButtonOK_clicked() {
     this->close();
 }

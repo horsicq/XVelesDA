@@ -18,16 +18,16 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 //
-#include "guimainwindow.h"
 #include <QApplication>
+
+#include "guimainwindow.h"
 #include "xoptions.h"
 
-int main(int argc, char *argv[])
-{
+int main(int argc, char *argv[]) {
     QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
 #ifdef Q_OS_MAC
 #ifndef QT_DEBUG
-   QCoreApplication::setLibraryPaths(QStringList(QString(argv[0]).remove("MacOS/xvelesda")+"PlugIns"));
+    QCoreApplication::setLibraryPaths(QStringList(QString(argv[0]).remove("MacOS/xvelesda") + "PlugIns"));
 #endif
 #endif
     QCoreApplication::setOrganizationName(X_ORGANIZATIONNAME);
@@ -37,7 +37,7 @@ int main(int argc, char *argv[])
 
     QApplication a(argc, argv);
 
-    XOptions::adjustApplicationView(X_OPTIONSFILE,X_APPLICATIONFILENAME);
+    XOptions::adjustApplicationView(X_OPTIONSFILE, X_APPLICATIONFILENAME);
 
     GuiMainWindow w;
     w.show();

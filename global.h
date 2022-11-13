@@ -30,4 +30,4 @@
 #define X_ORGANIZATIONDOMAIN "ntinfo.biz"
 #define X_OPTIONSFILE "xvelesda.ini"
 
-#endif // _GLOBAL_H
+#endif  // _GLOBAL_H

@@ -19,15 +19,13 @@
 // SOFTWARE.
 //
 #include "guimainwindow.h"
+
 #include "ui_guimainwindow.h"
 
-GuiMainWindow::GuiMainWindow(QWidget *parent) :
-    QMainWindow(parent),
-    ui(new Ui::GuiMainWindow)
-{
+GuiMainWindow::GuiMainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::GuiMainWindow) {
     ui->setupUi(this);
 
-    pFile=nullptr;
+    pFile = nullptr;
 
     setWindowTitle(QString("%1 v%2").arg(X_APPLICATIONNAME).arg(X_APPLICATIONVERSION));
 
@@ -50,151 +48,124 @@ GuiMainWindow::GuiMainWindow(QWidget *parent) :
 
     adjust();
 
-    if(QCoreApplication::arguments().count()>1)
-    {
-        QString sFileName=QCoreApplication::arguments().at(1);
+    if (QCoreApplication::arguments().count() > 1) {
+        QString sFileName = QCoreApplication::arguments().at(1);
 
-        processFile(sFileName,true);
+        processFile(sFileName, true);
     }
 }
 
-GuiMainWindow::~GuiMainWindow()
-{
+GuiMainWindow::~GuiMainWindow() {
     closeCurrentFile();
     xOptions.save();
 
     delete ui;
 }
 
-void GuiMainWindow::on_actionOpen_triggered()
-{
-    QString sDirectory=xOptions.getLastDirectory();
+void GuiMainWindow::on_actionOpen_triggered() {
+    QString sDirectory = xOptions.getLastDirectory();
 
-    QString sFileName=QFileDialog::getOpenFileName(this,tr("Open file")+QString("..."),sDirectory,tr("All files")+QString(" (*)"));
+    QString sFileName = QFileDialog::getOpenFileName(this, tr("Open file") + QString("..."), sDirectory, tr("All files") + QString(" (*)"));
 
-    if(!sFileName.isEmpty())
-    {
-        processFile(sFileName,xOptions.getValue(XOptions::ID_SCANAFTEROPEN).toBool());
+    if (!sFileName.isEmpty()) {
+        processFile(sFileName, xOptions.getValue(XOptions::ID_SCANAFTEROPEN).toBool());
     }
 }
 
-void GuiMainWindow::on_actionClose_triggered()
-{
+void GuiMainWindow::on_actionClose_triggered() {
     closeCurrentFile();
 }
 
-void GuiMainWindow::on_actionExit_triggered()
-{
+void GuiMainWindow::on_actionExit_triggered() {
     this->close();
 }
 
-void GuiMainWindow::on_actionOptions_triggered()
-{
-    DialogOptions dialogOptions(this,&xOptions);
+void GuiMainWindow::on_actionOptions_triggered() {
+    DialogOptions dialogOptions(this, &xOptions);
     dialogOptions.exec();
 
     adjust();
 }
 
-void GuiMainWindow::on_actionAbout_triggered()
-{
+void GuiMainWindow::on_actionAbout_triggered() {
     DialogAbout dialogAbout(this);
     dialogAbout.exec();
 }
 
-void GuiMainWindow::adjust()
-{
+void GuiMainWindow::adjust() {
     xOptions.adjustStayOnTop(this);
 
-    if(pFile)
-    {
-        if(xOptions.isSaveBackup())
-        {
+    if (pFile) {
+        if (xOptions.isSaveBackup()) {
             ui->widgetViewer->setBackupFileName(XBinary::getBackupName(pFile));
-        }
-        else
-        {
+        } else {
             ui->widgetViewer->setBackupFileName("");
         }
     }
 }
 
-void GuiMainWindow::processFile(QString sFileName, bool bReload)
-{
-    if((sFileName!="")&&(QFileInfo(sFileName).isFile()))
-    {
+void GuiMainWindow::processFile(QString sFileName, bool bReload) {
+    if ((sFileName != "") && (QFileInfo(sFileName).isFile())) {
         xOptions.setLastDirectory(QFileInfo(sFileName).absolutePath());
 
         closeCurrentFile();
 
-        pFile=new QFile;
+        pFile = new QFile;
 
         pFile->setFileName(sFileName);
 
-        if(!pFile->open(QIODevice::ReadWrite))
-        {
-            if(!pFile->open(QIODevice::ReadOnly))
-            {
+        if (!pFile->open(QIODevice::ReadWrite)) {
+            if (!pFile->open(QIODevice::ReadOnly)) {
                 closeCurrentFile();
             }
         }
 
-        if(pFile)
-        {
+        if (pFile) {
             ui->stackedWidgetMain->setCurrentIndex(1);
 
-            ui->widgetViewer->setData(pFile,0,0,bReload);
+            ui->widgetViewer->setData(pFile, 0, 0, bReload);
 
             adjust();
 
             setWindowTitle(sFileName);
-        }
-        else
-        {
-            QMessageBox::critical(this,tr("Error"),tr("Cannot open file"));
+        } else {
+            QMessageBox::critical(this, tr("Error"), tr("Cannot open file"));
         }
     }
 }
 
-void GuiMainWindow::closeCurrentFile()
-{
+void GuiMainWindow::closeCurrentFile() {
     ui->stackedWidgetMain->setCurrentIndex(0);
 
-    if(pFile)
-    {
+    if (pFile) {
         pFile->close();
         delete pFile;
-        pFile=nullptr;
+        pFile = nullptr;
     }
 
     setWindowTitle(QString("%1 v%2").arg(X_APPLICATIONNAME).arg(X_APPLICATIONVERSION));
 }
 
-void GuiMainWindow::dragEnterEvent(QDragEnterEvent *event)
-{
+void GuiMainWindow::dragEnterEvent(QDragEnterEvent *event) {
     event->acceptProposedAction();
 }
 
-void GuiMainWindow::dragMoveEvent(QDragMoveEvent *event)
-{
+void GuiMainWindow::dragMoveEvent(QDragMoveEvent *event) {
     event->acceptProposedAction();
 }
 
-void GuiMainWindow::dropEvent(QDropEvent *event)
-{
-    const QMimeData* mimeData=event->mimeData();
+void GuiMainWindow::dropEvent(QDropEvent *event) {
+    const QMimeData *mimeData = event->mimeData();
 
-    if(mimeData->hasUrls())
-    {
-        QList<QUrl> urlList=mimeData->urls();
+    if (mimeData->hasUrls()) {
+        QList<QUrl> urlList = mimeData->urls();
 
-        if(urlList.count())
-        {
-            QString sFileName=urlList.at(0).toLocalFile();
+        if (urlList.count()) {
+            QString sFileName = urlList.at(0).toLocalFile();
 
-            sFileName=XBinary::convertFileName(sFileName);
+            sFileName = XBinary::convertFileName(sFileName);
 
-            processFile(sFileName,xOptions.getValue(XOptions::ID_SCANAFTEROPEN).toBool());
+            processFile(sFileName, xOptions.getValue(XOptions::ID_SCANAFTEROPEN).toBool());
         }
     }
 }
