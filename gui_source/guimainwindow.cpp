@@ -36,13 +36,13 @@ GuiMainWindow::GuiMainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::
 
     QList<XOptions::ID> listIDs;
 
-    listIDs.append(XOptions::ID_STYLE);
-    listIDs.append(XOptions::ID_LANG);
-    listIDs.append(XOptions::ID_QSS);
-    listIDs.append(XOptions::ID_STAYONTOP);
-    listIDs.append(XOptions::ID_SCANAFTEROPEN);
-    listIDs.append(XOptions::ID_SAVELASTDIRECTORY);
-    listIDs.append(XOptions::ID_SAVEBACKUP);
+//    listIDs.append(XOptions::ID_STYLE);
+//    listIDs.append(XOptions::ID_LANG);
+//    listIDs.append(XOptions::ID_QSS);
+//    listIDs.append(XOptions::ID_STAYONTOP);
+//    listIDs.append(XOptions::ID_SCANAFTEROPEN);
+//    listIDs.append(XOptions::ID_SAVELASTDIRECTORY);
+//    listIDs.append(XOptions::ID_SAVEBACKUP);
 
     xOptions.setValueIDs(listIDs);
     xOptions.load();
@@ -71,7 +71,7 @@ void GuiMainWindow::on_actionOpen_triggered()
     QString sFileName = QFileDialog::getOpenFileName(this, tr("Open file") + QString("..."), sDirectory, tr("All files") + QString(" (*)"));
 
     if (!sFileName.isEmpty()) {
-        processFile(sFileName, xOptions.getValue(XOptions::ID_SCANAFTEROPEN).toBool());
+        processFile(sFileName, xOptions.getValue(XOptions::ID_SCAN_SCANAFTEROPEN).toBool());
     }
 }
 
@@ -105,7 +105,7 @@ void GuiMainWindow::adjust()
 
     if (pFile) {
         if (xOptions.isSaveBackup()) {
-            ui->widgetViewer->setBackupFileName(XBinary::getBackupName(pFile));
+            ui->widgetViewer->setBackupFileName(XBinary::getDeviceFileName(pFile));
         } else {
             ui->widgetViewer->setBackupFileName("");
         }
@@ -178,7 +178,7 @@ void GuiMainWindow::dropEvent(QDropEvent *event)
 
             sFileName = XBinary::convertFileName(sFileName);
 
-            processFile(sFileName, xOptions.getValue(XOptions::ID_SCANAFTEROPEN).toBool());
+            processFile(sFileName, xOptions.getValue(XOptions::ID_SCAN_SCANAFTEROPEN).toBool());
         }
     }
 }
