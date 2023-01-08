@@ -36,13 +36,13 @@ GuiMainWindow::GuiMainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::
 
     QList<XOptions::ID> listIDs;
 
-//    listIDs.append(XOptions::ID_STYLE);
-//    listIDs.append(XOptions::ID_LANG);
-//    listIDs.append(XOptions::ID_QSS);
-//    listIDs.append(XOptions::ID_STAYONTOP);
-//    listIDs.append(XOptions::ID_SCANAFTEROPEN);
-//    listIDs.append(XOptions::ID_SAVELASTDIRECTORY);
-//    listIDs.append(XOptions::ID_SAVEBACKUP);
+    //    listIDs.append(XOptions::ID_STYLE);
+    //    listIDs.append(XOptions::ID_LANG);
+    //    listIDs.append(XOptions::ID_QSS);
+    //    listIDs.append(XOptions::ID_STAYONTOP);
+    //    listIDs.append(XOptions::ID_SCANAFTEROPEN);
+    //    listIDs.append(XOptions::ID_SAVELASTDIRECTORY);
+    //    listIDs.append(XOptions::ID_SAVEBACKUP);
 
     xOptions.setValueIDs(listIDs);
     xOptions.load();
