@@ -35,8 +35,6 @@ FORMS += \
     ../FormatWidgets/dialogprocessdata.ui \
     ../FormatWidgets/dialogsectionheader.ui \
     ../FormatWidgets/toolswidget.ui \
-    ../QHexView/dialoghex.ui \
-    ../QHexView/qhexviewwidget.ui \
     ../XDisasm/dialogdisasmlabels.ui \
     ../XDisasm/dialogdisasmprocess.ui \
     ../XDisasm/dialogsignature.ui \
@@ -118,9 +116,6 @@ HEADERS += \
     ../Formats/xne_def.h \
     ../Formats/xpe.h \
     ../Formats/xpe_def.h \
-    ../QHexView/dialoghex.h \
-    ../QHexView/qhexview.h \
-    ../QHexView/qhexviewwidget.h \
     ../XCapstone/3rdparty/Capstone/src/MCInst.h \
     ../XCapstone/3rdparty/Capstone/src/MCRegisterInfo.h \
     ../XCapstone/3rdparty/Capstone/src/SStream.h \
@@ -312,9 +307,6 @@ SOURCES += \
     ../Formats/xmsdos.cpp \
     ../Formats/xne.cpp \
     ../Formats/xpe.cpp \
-    ../QHexView/dialoghex.cpp \
-    ../QHexView/qhexview.cpp \
-    ../QHexView/qhexviewwidget.cpp \
     ../XCapstone/3rdparty/Capstone/src/MCInst.c \
     ../XCapstone/3rdparty/Capstone/src/MCRegisterInfo.c \
     ../XCapstone/3rdparty/Capstone/src/SStream.c \
